@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\Programming-Hero - Next Level Course\\Postgres\\HealthCare-Server\\logs\\winston\\errors\\.3a959a828bb55746cf23138c1d73b0293c375f15-audit.json",
+    "files": [
+        {
+            "date": 1715606948517,
+            "name": "D:\\Programming-Hero - Next Level Course\\Postgres\\HealthCare-Server\\logs\\winston\\errors\\phu-2024-13-05-19-error.log",
+            "hash": "89fd0d4e12f5b2913c39254a3c8d40544cea3df033e54c937a8f62df35e853bf"
+        },
+        {
+            "date": 1716139315952,
+            "name": "D:\\Programming-Hero - Next Level Course\\Postgres\\HealthCare-Server\\logs\\winston\\errors\\phu-2024-19-05-23-error.log",
+            "hash": "cab3759a036c5b23517f2676eb420a121ff5aca9e433c735be9214f68666026e"
+        }
+    ],
+    "hashType": "sha256"
+}
