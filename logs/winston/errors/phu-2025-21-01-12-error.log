@@ -1,0 +1,42 @@
+Tue Jan 21 2025 12:17:1 } [PH] error: 
+Invalid `prisma.appointment.findMany()` invocation:
+
+
+Authentication failed against database server at `localhost`, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at `localhost`.
+Tue Jan 21 2025 12:18:0 } [PH] error: 
+Invalid `prisma.appointment.findMany()` invocation:
+
+
+Authentication failed against database server at `localhost`, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at `localhost`.
+Tue Jan 21 2025 12:19:0 } [PH] error: 
+Invalid `prisma.appointment.findMany()` invocation:
+
+
+Authentication failed against database server at `localhost`, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at `localhost`.
+Tue Jan 21 2025 12:20:0 } [PH] error: 
+Invalid `prisma.appointment.findMany()` invocation:
+
+
+Authentication failed against database server at `localhost`, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at `localhost`.
+Tue Jan 21 2025 12:21:0 } [PH] error: 
+Invalid `prisma.appointment.findMany()` invocation:
+
+
+Authentication failed against database server at `localhost`, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at `localhost`.
+Tue Jan 21 2025 12:22:0 } [PH] error: 
+Invalid `prisma.appointment.findMany()` invocation:
+
+
+Authentication failed against database server at `localhost`, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at `localhost`.

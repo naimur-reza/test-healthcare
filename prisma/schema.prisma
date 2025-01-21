@@ -32,6 +32,7 @@ model Doctor {
   name                String
   profilePhoto        String?
   contactNumber       String
+  city                String
   address             String?
   registrationNumber  String
   experience          Int                 @default(0)

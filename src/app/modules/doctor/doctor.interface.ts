@@ -1,4 +1,5 @@
 export type IDoctorFilterRequest = {
+  city?: string | undefined;
   searchTerm?: string | undefined;
   email?: string | undefined;
   contactNo?: string | undefined;
@@ -10,6 +11,7 @@ export type IDoctorUpdate = {
   name: string;
   profilePhoto: string;
   contactNumber: string;
+  city: string;
   address: string;
   registrationNumber: string;
   experience: number;
