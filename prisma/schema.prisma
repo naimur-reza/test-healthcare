@@ -256,6 +256,23 @@ model Review {
   @@map("reviews")
 }
 
+model Notification {
+  id            String   @id @default(uuid())
+  title         String
+  content       String
+  recipientId   String   // ID of the recipient (Doctor or Patient)
+  recipientType NotificationRecipientType   // Either "DOCTOR" or "PATIENT"
+  isRead        Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  @@map("notifications")
+}
+
+enum NotificationRecipientType {
+  DOCTOR
+  PATIENT
+}
+
 enum UserRole {
   ADMIN
   DOCTOR
