@@ -1,6 +1,7 @@
 import {
   Appointment,
   AppointmentStatus,
+  NotificationRecipientType,
   PaymentStatus,
   Prisma,
   UserRole,
@@ -19,32 +20,34 @@ import {
 } from './appointment.constants';
 import { generateTransactionId } from '../payment/payment.utils';
 import { asyncForEach } from '../../../shared/utils';
+import { Server } from 'socket.io';
 
 const createAppointment = async (
   data: Partial<Appointment>,
   authUser: IAuthUser,
+  io: Server,
 ) => {
   const { doctorId, scheduleId } = data;
+
+  // Check if doctor exists
   const isDoctorExists = await prisma.doctor.findFirst({
-    where: {
-      id: doctorId,
-    },
+    where: { id: doctorId },
   });
 
   if (!isDoctorExists) {
-    throw new ApiError(httpStatus.BAD_REQUEST, "Doctor doesn't exists!");
+    throw new ApiError(httpStatus.BAD_REQUEST, "Doctor doesn't exist!");
   }
 
+  // Check if patient exists
   const isPatientExists = await prisma.patient.findFirst({
-    where: {
-      email: authUser?.email,
-    },
+    where: { email: authUser?.email },
   });
 
   if (!isPatientExists) {
-    throw new ApiError(httpStatus.BAD_REQUEST, "Patient doesn't exists!");
+    throw new ApiError(httpStatus.BAD_REQUEST, "Patient doesn't exist!");
   }
 
+  // Check if doctor's schedule is available
   const isExistsDoctorSchedule = await prisma.doctorSchedule.findFirst({
     where: {
       doctorId: doctorId,
@@ -63,6 +66,7 @@ const createAppointment = async (
   const videoCallingId: string = uuidv4();
 
   return await prisma.$transaction(async transactionClient => {
+    // Create appointment
     const result = await transactionClient.appointment.create({
       data: {
         patientId: isPatientExists.id,
@@ -76,6 +80,7 @@ const createAppointment = async (
       },
     });
 
+    // Update doctor's schedule
     await transactionClient.doctorSchedule.updateMany({
       where: {
         doctorId: isDoctorExists.id,
@@ -87,6 +92,7 @@ const createAppointment = async (
       },
     });
 
+    // Create payment
     const transactionId: string = generateTransactionId(result.id);
 
     await transactionClient.payment.create({
@@ -96,6 +102,47 @@ const createAppointment = async (
         transactionId,
       },
     });
+
+    const formatDateTime = (dateString: string): string => {
+      const date = new Date(dateString);
+      const options: Intl.DateTimeFormatOptions = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+      };
+      return new Intl.DateTimeFormat('en-US', options).format(date);
+    };
+
+    // Format the start and end date/times
+    const formattedStartDateTime = formatDateTime(result.schedule.startDate.toString());
+    const formattedEndDateTime = formatDateTime(result.schedule.endDate.toString());
+
+    // Create notifications
+    const patientNotification = {
+      title: 'Appointment Confirmed',
+      content: `Your appointment with Dr. ${result.doctor.name} is confirmed on ${formattedStartDateTime} to ${formattedEndDateTime}.`,
+      recipientId: isPatientExists.id,
+      recipientType: NotificationRecipientType.PATIENT,
+    };
+
+    const doctorNotification = {
+      title: 'New Appointment',
+      content: `You have a new appointment with ${isPatientExists.name} on ${formattedStartDateTime} to ${formattedEndDateTime}.`,
+      recipientId: isDoctorExists.id,
+      recipientType: NotificationRecipientType.DOCTOR,
+    };
+
+    await transactionClient.notification.createMany({
+      data: [patientNotification, doctorNotification],
+    });
+
+    // Emit notifications via Socket.IO
+    io.to(isDoctorExists.id).emit('newNotification', doctorNotification);
+    io.to(isPatientExists.id).emit('newNotification', patientNotification);
 
     return result;
   });
@@ -144,15 +191,15 @@ const getMyAppointment = async (
       options.sortBy && options.sortOrder
         ? { [options.sortBy]: options.sortOrder }
         : {
-            createdAt: 'desc',
-          },
+          createdAt: 'desc',
+        },
     include:
       authUser?.role === UserRole.PATIENT
         ? { doctor: true, schedule: true }
         : {
-            patient: { include: { medicalReport: true, prescription: true } },
-            schedule: true,
-          },
+          patient: { include: { medicalReport: true, prescription: true } },
+          schedule: true,
+        },
   });
   const total = await prisma.appointment.count({
     where: whereConditions,
@@ -219,8 +266,8 @@ const getAllFromDB = async (
       options.sortBy && options.sortOrder
         ? { [options.sortBy]: options.sortOrder }
         : {
-            createdAt: 'desc',
-          },
+          createdAt: 'desc',
+        },
     include: {
       doctor: true,
       patient: true,
