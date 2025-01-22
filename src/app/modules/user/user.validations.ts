@@ -7,6 +7,7 @@ const createDoctor = z.object({
     email: z.string().email(),
     name: z.string(),
     contactNumber: z.string(),
+    city: z.string(),
     address: z.string().nullable(),
     registrationNumber: z.string(),
     experience: z.number().int(),

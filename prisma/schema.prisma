@@ -32,6 +32,7 @@ model Doctor {
   name                String
   profilePhoto        String?
   contactNumber       String
+  city                String
   address             String?
   registrationNumber  String
   experience          Int                 @default(0)
@@ -253,6 +254,23 @@ model Review {
   updatedAt DateTime @updatedAt
 
   @@map("reviews")
+}
+
+model Notification {
+  id            String   @id @default(uuid())
+  title         String
+  content       String
+  recipientId   String   // ID of the recipient (Doctor or Patient)
+  recipientType NotificationRecipientType   // Either "DOCTOR" or "PATIENT"
+  isRead        Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  @@map("notifications")
+}
+
+enum NotificationRecipientType {
+  DOCTOR
+  PATIENT
 }
 
 enum UserRole {

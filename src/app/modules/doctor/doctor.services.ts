@@ -25,7 +25,7 @@ const getAllFromDB = async (
   options: IPaginationOptions,
 ): Promise<IGenericResponse<Doctor[]>> => {
   const { limit, page, skip } = paginationHelpers.calculatePagination(options);
-  const { searchTerm, specialties, ...filterData } = filters;
+  const { searchTerm, specialties, city, ...filterData } = filters;
 
   const andConditions: Prisma.DoctorWhereInput[] = [];
 
@@ -52,6 +52,16 @@ const getAllFromDB = async (
             },
           },
         },
+      },
+    });
+  }
+
+  // filter doctor by city
+  if (city) {
+    andConditions.push({
+      city: {
+        equals: city,
+        mode: 'insensitive',
       },
     });
   }
