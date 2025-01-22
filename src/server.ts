@@ -1,37 +1,33 @@
-import { Server } from 'http';
+import { createServer } from 'http';
+import { Server as IOServer } from 'socket.io';
 import app from './app';
 import config from './config';
-import { errorlogger, logger } from './shared/logger';
+import { logger } from './shared/logger';
 
+// Create HTTP and Socket.IO server
+const httpServer = createServer(app);
+export const io = new IOServer(httpServer, {
+  cors: {
+    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    methods: ['GET', 'POST'],
+    credentials: true,
+  },
+});
 
-async function bootstrap() {
-  const server: Server = app.listen(config.port, () => {
-    logger.info(`Server running on port ${config.port}`);
+io.on('connection', socket => {
+  const userId = socket.handshake.auth.userId; // Pass userId during client connection
+  if (!userId) {
+    return;
+  }
+  // Join the user to a specific room
+  socket.join(userId);
+  socket.on('disconnect', () => {
+    logger.info(`Client disconnected: ${socket.id}`);
   });
+});
 
-  const exitHandler = () => {
-    if (server) {
-      server.close(() => {
-        logger.info('Server closed');
-      });
-    }
-    process.exit(1);
-  };
+const server = httpServer.listen(config.port, () => {
+  logger.info(`Server running on port ${config.port}`);
+});
 
-  const unexpectedErrorHandler = (error: unknown) => {
-    errorlogger.error(error);
-    exitHandler();
-  };
-
-  process.on('uncaughtException', unexpectedErrorHandler);
-  process.on('unhandledRejection', unexpectedErrorHandler);
-
-  // process.on('SIGTERM', () => {
-  //   logger.info('SIGTERM received');
-  //   if (server) {
-  //     server.close();
-  //   }
-  // });
-}
-
-bootstrap();
+export default server;

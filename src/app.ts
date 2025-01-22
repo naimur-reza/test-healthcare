@@ -8,6 +8,7 @@ import cron from 'node-cron';
 import { AppointmentServices } from './app/modules/appointment/appointment.services';
 import { errorlogger } from './shared/logger';
 import config from './config';
+import { io } from './server';
 
 const app: Application = express();
 
@@ -23,6 +24,11 @@ app.use(cookieParser());
 //parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
 
 app.use('/api/v1', routes);
 
