@@ -17,4 +17,16 @@ router.get(
   NotificationController.getUsersNotificationById,
 )
 
+router.patch(
+  '/toggle-mark-as-read/:notificationId',
+  auth(ENUM_USER_ROLE.PATIENT, ENUM_USER_ROLE.DOCTOR),
+  NotificationController.toggleMarkNotificationAsRead,
+)
+
+router.delete(
+  '/delete-notification/:notificationId',
+  auth(ENUM_USER_ROLE.PATIENT, ENUM_USER_ROLE.DOCTOR),
+  NotificationController.deleteNotification,
+)
+
 export const NotificationRoutes = router;
