@@ -20,6 +20,27 @@ const getUsersNotification = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getUsersNotificationById = catchAsync(async (req: Request, res: Response) => {
+  const user = req.user;
+  const userId = user!.userId as string;
+  const role = user!.role;
+  const notificationId = req.params.notificationId;
+
+  const result = await NotificationService.getUsersNotificationByIdFromDB(
+    userId, 
+    role,
+    notificationId
+  );
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Notification retrieval successfully',
+    data: result,
+  });
+})
+
 export const NotificationController = {
   getUsersNotification,
+  getUsersNotificationById,
 }
