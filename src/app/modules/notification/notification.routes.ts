@@ -11,4 +11,10 @@ router.get(
   NotificationController.getUsersNotification,
 )
 
+router.get(
+  '/my-notifications/:notificationId',
+  auth(ENUM_USER_ROLE.PATIENT, ENUM_USER_ROLE.DOCTOR),
+  NotificationController.getUsersNotificationById,
+)
+
 export const NotificationRoutes = router;
