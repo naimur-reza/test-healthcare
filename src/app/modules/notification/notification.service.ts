@@ -17,21 +17,8 @@ const getUsersNotificationFromDB = async (
   }
 
   let recipientId;
-  if (user?.role === 'DOCTOR') {
-    const doctor = await prisma.doctor.findUnique({
-      where: {
-        email: user?.email,
-      }
-    })
-    recipientId = doctor?.id;
-  }
-  if (user?.role === 'PATIENT') {
-    const patient = await prisma.patient.findUnique({
-      where: {
-        email: user?.email,
-      }
-    })
-    recipientId = patient?.id;
+  if (user?.role === 'DOCTOR' || user?.role === 'PATIENT') {
+    recipientId = user?.id;
   }
 
   const notifications = await prisma.notification.findMany({
@@ -73,27 +60,8 @@ const getUsersNotificationByIdFromDB = async (
   }
 
   let recipientId;
-  if (user.role === 'DOCTOR') {
-    const doctor = await prisma.doctor.findUnique({
-      where: {
-        email: user?.email,
-      }
-    })
-    if (!doctor) {
-      throw new ApiError(httpStatus.NOT_FOUND, 'Doctor not found');
-    }
-    recipientId = doctor?.id;
-  }
-  if (user.role === 'PATIENT') {
-    const patient = await prisma.patient.findUnique({
-      where: {
-        email: user.email,
-      }
-    })
-    if (!patient) {
-      throw new ApiError(httpStatus.NOT_FOUND, 'Patient not found');
-    }
-    recipientId = patient.id;
+  if (user.role === 'DOCTOR' || user.role === 'PATIENT') {
+    recipientId = user?.id;
   }
 
   const notification = await prisma.notification.findUnique({
@@ -134,21 +102,9 @@ const toggleMarkNotificationAsReadFromDB = async (
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
   }
 
-  const recipientId = await (async () => {
-    if (user.role === 'DOCTOR') {
-      const doctor = await prisma.doctor.findUnique({
-        where: { email: user.email },
-      });
-      if (!doctor) throw new ApiError(httpStatus.NOT_FOUND, 'Doctor not found');
-      return doctor.id;
-    } else if (user.role === 'PATIENT') {
-      const patient = await prisma.patient.findUnique({
-        where: { email: user.email },
-      });
-      if (!patient) throw new ApiError(httpStatus.NOT_FOUND, 'Patient not found');
-      return patient.id;
-    }
-  })();
+  const recipientId = (user.role === 'DOCTOR' || user.role === 'PATIENT')
+    ? user.id
+    : undefined;
 
   const notification = await prisma.notification.findUnique({
     where: { id: notificationId },

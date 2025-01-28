@@ -6,3 +6,15 @@ export const asyncForEach = async (array: any[], callback: any) => {
     await callback(array[index], index, array);
   }
 };
+
+export const slugGenerator = (metaData: string): string => {
+  const formattedMetaData = metaData
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  const currentDate = new Date();
+  const dateTimeString = currentDate.toISOString().replace(/[:.]/g, '-');
+
+  return `${formattedMetaData}-${dateTimeString}`;
+};

@@ -18,7 +18,7 @@ router.get(
 )
 
 router.patch(
-  '/toggle-mark-as-read/:notificationId',
+  '/toggle-read-unread/:notificationId',
   auth(ENUM_USER_ROLE.PATIENT, ENUM_USER_ROLE.DOCTOR),
   NotificationController.toggleMarkNotificationAsRead,
 )

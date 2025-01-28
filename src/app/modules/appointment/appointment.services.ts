@@ -19,7 +19,7 @@ import {
   appointmentSearchableFields,
 } from './appointment.constants';
 import { generateTransactionId } from '../payment/payment.utils';
-import { asyncForEach } from '../../../shared/utils';
+import { asyncForEach, slugGenerator } from '../../../shared/utils';
 import { Server } from 'socket.io';
 
 const createAppointment = async (
@@ -121,19 +121,43 @@ const createAppointment = async (
     const formattedStartDateTime = formatDateTime(result.schedule.startDate.toString());
     const formattedEndDateTime = formatDateTime(result.schedule.endDate.toString());
 
-    // Create notifications
+    // Create notification for patient
+    const patientUser = await prisma.user.findFirst({
+      where: {
+        email: isPatientExists.email,
+      },
+    });
+    if (!patientUser) {
+      throw new ApiError(httpStatus.NOT_FOUND, 'Patient not found!');
+    }
+    const patientSlugMetaData = `Appointment Confirmed with ${result.doctor.name}`
+    const patientNotificationSlug = slugGenerator(patientSlugMetaData);
     const patientNotification = {
       title: 'Appointment Confirmed',
-      content: `Your appointment with Dr. ${result.doctor.name} is confirmed on ${formattedStartDateTime} to ${formattedEndDateTime}.`,
-      recipientId: isPatientExists.id,
+      content: `Your appointment with ${result.doctor.name} is confirmed on ${formattedStartDateTime} to ${formattedEndDateTime}.`,
+      recipientId: patientUser.id,
       recipientType: NotificationRecipientType.PATIENT,
+      slug: patientNotificationSlug,
     };
 
+    // Create notification for doctor
+    const doctorUser = await prisma.user.findFirst({
+      where: {
+        email: isDoctorExists.email,
+      }
+    })
+    if (!doctorUser) {
+      throw new ApiError(httpStatus.NOT_FOUND, 'Doctor not found!');
+    }
+
+    const doctorSlugMetaData = `New appointment with ${isPatientExists.name}`
+    const doctorNotificationSlug = slugGenerator(doctorSlugMetaData);
     const doctorNotification = {
       title: 'New Appointment',
       content: `You have a new appointment with ${isPatientExists.name} on ${formattedStartDateTime} to ${formattedEndDateTime}.`,
-      recipientId: isDoctorExists.id,
+      recipientId: doctorUser.id,
       recipientType: NotificationRecipientType.DOCTOR,
+      slug: doctorNotificationSlug,
     };
 
     await transactionClient.notification.createMany({
@@ -141,8 +165,8 @@ const createAppointment = async (
     });
 
     // Emit notifications via Socket.IO
-    io.to(isDoctorExists.id).emit('newNotification', doctorNotification);
-    io.to(isPatientExists.id).emit('newNotification', patientNotification);
+    io.to(doctorUser.id).emit('newNotification', doctorNotification);
+    io.to(patientUser.id).emit('newNotification', patientNotification);
 
     return result;
   });
