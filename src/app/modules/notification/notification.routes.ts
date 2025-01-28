@@ -2,8 +2,17 @@ import { Router } from "express";
 import { ENUM_USER_ROLE } from "../../../enums/user";
 import auth from "../../middlewares/auth";
 import { NotificationController } from "./notification.controller";
+import validateRequest from "../../middlewares/validateRequest";
+import { NotificationValidationSchema } from "./notification.validation";
 
 const router = Router();
+
+router.post(
+  '/send-notification',
+  auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
+  validateRequest(NotificationValidationSchema),
+  NotificationController.sendNotification,
+)
 
 router.get(
   '/my-notifications',

@@ -2,6 +2,59 @@ import httpStatus from "http-status";
 import ApiError from "../../../errors/ApiError";
 import prisma from "../../../shared/prisma";
 import { NotificationRecipientType } from "./notification.interface";
+import { UserRole, UserStatus } from "@prisma/client";
+import { Server } from "socket.io";
+import { slugGenerator } from "../../../shared/utils";
+
+const sendNotificationToDB = async (
+  userId: string,
+  payload: Record<string, string>,
+  io: Server
+) => {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'This user not found');
+  }
+  if (user.status !== UserStatus.ACTIVE) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'This user is not active');
+  }
+
+  const allUsers = await prisma.user.findMany({
+    where: { status: UserStatus.ACTIVE },
+  });
+
+  const roleToRecipientType: Record<UserRole, NotificationRecipientType> = {
+    [UserRole.SUPER_ADMIN]: NotificationRecipientType.SUPER_ADMIN,
+    [UserRole.ADMIN]: NotificationRecipientType.ADMIN,
+    [UserRole.DOCTOR]: NotificationRecipientType.DOCTOR,
+    [UserRole.PATIENT]: NotificationRecipientType.PATIENT,
+  };
+
+  const notificationPromises = allUsers.map(async (user) => {
+    const recipientType = roleToRecipientType[user.role];
+    if (!recipientType) return;
+
+    const notificationPayload = {
+      title: payload.title,
+      content: payload.content,
+      recipientId: user.id,
+      recipientType,
+      slug: slugGenerator(payload.title as string),
+    };
+
+    await prisma.notification.create({ data: notificationPayload });
+
+    io.to(user.id).emit('newNotification', notificationPayload);
+  });
+
+  await Promise.all(notificationPromises);
+
+  console.log('Notifications sent successfully');
+};
+
 
 const getUsersNotificationFromDB = async (
   userId: string,
@@ -168,6 +221,7 @@ const deleteNotificationFromDB = async (
 }
 
 export const NotificationService = {
+  sendNotificationToDB,
   getUsersNotificationFromDB,
   getUsersNotificationByIdFromDB,
   toggleMarkNotificationAsReadFromDB,

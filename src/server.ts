@@ -15,7 +15,7 @@ export const io = new IOServer(httpServer, {
 });
 
 io.on('connection', socket => {
-  const userId = socket.handshake.auth.userId; // Pass userId during client connection
+  const userId = socket.handshake.auth.userId;
   if (!userId) {
     return;
   }
