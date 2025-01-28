@@ -19,7 +19,7 @@ import {
   appointmentSearchableFields,
 } from './appointment.constants';
 import { generateTransactionId } from '../payment/payment.utils';
-import { asyncForEach } from '../../../shared/utils';
+import { asyncForEach, formatDateTime, slugGenerator } from '../../../shared/utils';
 import { Server } from 'socket.io';
 
 const createAppointment = async (
@@ -103,46 +103,68 @@ const createAppointment = async (
       },
     });
 
-    const formatDateTime = (dateString: string): string => {
-      const date = new Date(dateString);
-      const options: Intl.DateTimeFormatOptions = {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true,
-      };
-      return new Intl.DateTimeFormat('en-US', options).format(date);
-    };
-
     // Format the start and end date/times
     const formattedStartDateTime = formatDateTime(result.schedule.startDate.toString());
     const formattedEndDateTime = formatDateTime(result.schedule.endDate.toString());
 
-    // Create notifications
+    // Create notification for patient
+    const patientUser = await prisma.user.findFirst({
+      where: {
+        email: isPatientExists.email,
+      },
+    });
+    if (!patientUser) {
+      throw new ApiError(httpStatus.NOT_FOUND, 'Patient not found!');
+    }
+    const patientSlugMetaData = `Appointment Confirmed with ${result.doctor.name}`
+    const patientNotificationSlug = slugGenerator(patientSlugMetaData);
     const patientNotification = {
       title: 'Appointment Confirmed',
-      content: `Your appointment with Dr. ${result.doctor.name} is confirmed on ${formattedStartDateTime} to ${formattedEndDateTime}.`,
-      recipientId: isPatientExists.id,
+      content: `Your appointment with ${result.doctor.name} is confirmed on ${formattedStartDateTime} to ${formattedEndDateTime}.`,
+      recipientId: patientUser.id,
       recipientType: NotificationRecipientType.PATIENT,
+      slug: patientNotificationSlug,
     };
 
+    const paymentSlugMetaData = `Payment Pending for Appointment with ${result.doctor.name}`;
+    const paymentNotificationSlug = slugGenerator(paymentSlugMetaData);
+
+    const patientPaymentNotification = {
+      title: 'Complete Your Payment',
+      content: `Your appointment with ${result.doctor.name} is reserved. Please complete the payment within 30 minutes to confirm your booking. Your appointment is scheduled on ${formattedStartDateTime} to ${formattedEndDateTime}. Failure to complete the payment will result in the cancellation of your appointment.`,
+      recipientId: patientUser.id,
+      recipientType: NotificationRecipientType.PATIENT,
+      slug: paymentNotificationSlug,
+    };
+
+    // Create notification for doctor
+    const doctorUser = await prisma.user.findFirst({
+      where: {
+        email: isDoctorExists.email,
+      }
+    })
+    if (!doctorUser) {
+      throw new ApiError(httpStatus.NOT_FOUND, 'Doctor not found!');
+    }
+
+    const doctorSlugMetaData = `New appointment with ${isPatientExists.name}`
+    const doctorNotificationSlug = slugGenerator(doctorSlugMetaData);
     const doctorNotification = {
       title: 'New Appointment',
       content: `You have a new appointment with ${isPatientExists.name} on ${formattedStartDateTime} to ${formattedEndDateTime}.`,
-      recipientId: isDoctorExists.id,
+      recipientId: doctorUser.id,
       recipientType: NotificationRecipientType.DOCTOR,
+      slug: doctorNotificationSlug,
     };
 
     await transactionClient.notification.createMany({
-      data: [patientNotification, doctorNotification],
+      data: [patientPaymentNotification, patientNotification, doctorNotification],
     });
 
     // Emit notifications via Socket.IO
-    io.to(isDoctorExists.id).emit('newNotification', doctorNotification);
-    io.to(isPatientExists.id).emit('newNotification', patientNotification);
+    io.to(doctorUser.id).emit('newNotification', doctorNotification);
+    io.to(patientUser.id).emit('newNotification', patientPaymentNotification);
+    io.to(patientUser.id).emit('newNotification', patientNotification);
 
     return result;
   });
@@ -287,18 +309,27 @@ const getAllFromDB = async (
   };
 };
 
-const cancelUnpaidAppointments = async () => {
+const cancelUnpaidAppointments = async (io: Server) => {
   const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
-  const uppaidAppointments = await prisma.appointment.findMany({
+  const unPaidAppointments = await prisma.appointment.findMany({
     where: {
       paymentStatus: PaymentStatus.UNPAID,
       createdAt: {
         lte: thirtyMinutesAgo,
       },
     },
+    include: {
+      patient: {
+        include: { user: true },
+      },
+      doctor: {
+        include: { user: true },
+      }
+    },
+
   });
 
-  const appointmentIdsToCancel = uppaidAppointments.map(
+  const appointmentIdsToCancel = unPaidAppointments.map(
     appointment => appointment.id,
   );
   //const scheduleIdsToCancel = uppaidAppointments.map(appointment => appointment.scheduleId);
@@ -320,7 +351,7 @@ const cancelUnpaidAppointments = async () => {
       },
     });
 
-    await asyncForEach(uppaidAppointments, async (appointment: any) => {
+    await asyncForEach(unPaidAppointments, async (appointment: any) => {
       await transactionClient.doctorSchedule.updateMany({
         where: {
           AND: [
@@ -336,6 +367,36 @@ const cancelUnpaidAppointments = async () => {
           isBooked: false,
         },
       });
+
+      console.log(appointment);
+      // Create notification for doctor
+      const doctorSlugMetaData = `Appointment Cancelled by Patient ${appointment.patient.name}`;
+      const doctorNotificationSlug = slugGenerator(doctorSlugMetaData);
+      const doctorNotification = {
+        title: 'Appointment Cancelled',
+        content: `Your appointment with ${appointment.patient.name} has been cancelled.`,
+        recipientId: appointment.doctor.user.id,
+        recipientType: NotificationRecipientType.DOCTOR,
+        slug: doctorNotificationSlug,
+      };
+
+      // Create notification for patient
+      const patientSlugMetaData = `Appointment Cancelled with ${appointment.doctor.name}`;
+      const patientNotificationSlug = slugGenerator(patientSlugMetaData);
+      const patientNotification = {
+        title: 'Appointment Cancelled',
+        content: `Your appointment with Dr. ${appointment.doctor.name} has been cancelled due to payment failure. Please ensure payment is completed for future appointments.`,
+        recipientId: appointment.patient.user.id,
+        recipientType: NotificationRecipientType.PATIENT,
+        slug: patientNotificationSlug,
+      };
+
+      await transactionClient.notification.createMany({
+        data: [patientNotification, doctorNotification],
+      });
+
+      io.to(appointment.doctor.user.id).emit('newNotification', doctorNotification);
+      io.to(appointment.patient.user.id).emit('newNotification', patientNotification);
     });
   });
 };
@@ -386,3 +447,70 @@ export const AppointmentServices = {
   cancelUnpaidAppointments,
   changeAppointmentStatus,
 };
+
+
+/* 
+
+{
+  id: "appointment-id", // Unique ID of the appointment
+  patientId: "patient-id", // ID of the related patient
+  doctorId: "doctor-id", // ID of the related doctor
+  scheduleId: "schedule-id", // ID of the related schedule
+  videoCallingId: "video-call-id", // ID for video calling
+  status: "SCHEDULED", // Appointment status (default: SCHEDULED)
+  paymentStatus: "UNPAID", // Payment status (default: UNPAID)
+  notes: "Some notes", // Any notes for the appointment
+  createdAt: "2025-01-28T12:00:00.000Z", // Creation timestamp
+  updatedAt: "2025-01-28T12:30:00.000Z", // Last update timestamp
+  patient: { // Related patient data
+    id: "patient-id",
+    email: "patient@example.com",
+    name: "John Doe",
+    profilePhoto: "profile-photo-url",
+    contactNumber: "1234567890",
+    address: "Patient Address",
+    isDeleted: false,
+    createdAt: "2025-01-27T10:00:00.000Z",
+    updatedAt: "2025-01-28T12:00:00.000Z",
+    user: { // Related user data for the patient
+      id: "user-id",
+      email: "patient@example.com",
+      password: "hashed-password",
+      role: "PATIENT", // User role
+      needPasswordChange: true,
+      status: "ACTIVE", // User status
+      createdAt: "2025-01-01T08:00:00.000Z",
+      updatedAt: "2025-01-28T12:00:00.000Z"
+    }
+  },
+  doctor: { // Related doctor data
+    id: "doctor-id",
+    email: "doctor@example.com",
+    name: "Dr. Smith",
+    profilePhoto: "doctor-profile-url",
+    contactNumber: "9876543210",
+    city: "Doctor's City",
+    address: "Doctor's Address",
+    registrationNumber: "REG123",
+    experience: 10,
+    gender: "MALE",
+    apointmentFee: 500,
+    qualification: "MBBS",
+    currentWorkingPlace: "Hospital",
+    designation: "Consultant",
+    isDeleted: false,
+    createdAt: "2025-01-15T09:00:00.000Z",
+    updatedAt: "2025-01-28T11:00:00.000Z",
+    user: { // Related user data for the doctor
+      id: "user-id-doctor",
+      email: "doctor@example.com",
+      password: "hashed-password",
+      role: "DOCTOR",
+      needPasswordChange: false,
+      status: "ACTIVE",
+      createdAt: "2025-01-01T08:00:00.000Z",
+      updatedAt: "2025-01-28T11:00:00.000Z"
+    }
+  }
+}
+*/
