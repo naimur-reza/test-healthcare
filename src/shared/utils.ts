@@ -7,6 +7,20 @@ export const asyncForEach = async (array: any[], callback: any) => {
   }
 };
 
+export const formatDateTime = (dateString: string): string => {
+  const date = new Date(dateString);
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  };
+  return new Intl.DateTimeFormat('en-US', options).format(date);
+};
+
 export const slugGenerator = (metaData: string): string => {
   const formattedMetaData = metaData
     .toLowerCase()

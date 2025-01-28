@@ -41,7 +41,7 @@ app.get('/', async (req: Request, res: Response) => {
 // Schedule to run every minute
 cron.schedule('* * * * *', async (): Promise<void> => {
   try {
-    await AppointmentServices.cancelUnpaidAppointments();
+    await AppointmentServices.cancelUnpaidAppointments(io);
   } catch (error) {
     errorlogger.error(error);
   }
