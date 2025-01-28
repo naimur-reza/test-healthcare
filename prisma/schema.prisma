@@ -272,6 +272,8 @@ model Notification {
 enum NotificationRecipientType {
   DOCTOR
   PATIENT
+  ADMIN
+  SUPER_ADMIN
 }
 
 enum UserRole {

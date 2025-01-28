@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "3fa6531a-05bd-4b14-a58e-8cae9dbef962",
+		"_postman_id": "c462736c-116d-49e6-ac02-bbe237f5b84c",
 		"name": "PH-Healthcare",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "31250775"
+		"_exporter_id": "20639051"
 	},
 	"item": [
 		{
@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"super@admin.com\",\r\n    \"password\": \"superadmin\"\r\n}",
+							"raw": "{\r\n    \"email\": \"super.admin@admin.com\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -46,12 +46,12 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/auth/refresh-token",
+							"raw": "http://localhost:5000/api/v1/auth/refresh-token",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -83,12 +83,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/auth/change-password",
+							"raw": "http://localhost:5000/api/v1/auth/change-password",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -114,12 +114,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/auth/forgot-password",
+							"raw": "http://localhost:5000/api/v1/auth/forgot-password",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -151,12 +151,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/auth/reset-password",
+							"raw": "http://localhost:5000/api/v1/auth/reset-password",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -179,7 +179,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluN0Bob3RtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxMTQ3MTM3NCwiZXhwIjoxNzExNTU3Nzc0fQ.Uz54olEpPiTNbENaJuUIJiShBOeughjGPNG8hJx-p10",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNzhhYjQ2OC01MTNlLTQ5MjUtYjgyYS05YWI3M2I4ZThlZmQiLCJyb2xlIjoiU1VQRVJfQURNSU4iLCJlbWFpbCI6InN1cGVyLmFkbWluQGFkbWluLmNvbSIsImlhdCI6MTczNzQ0MTk5NSwiZXhwIjoxNzM3NTI4Mzk1fQ.AuccbLw0fw7Wgjqy9iR3orfX7R2onjKTgT9SmCb7_Xs",
 								"type": "text"
 							}
 						],
@@ -189,7 +189,7 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/Naimur Reza/Downloads/Screenshot 2024-03-09 at 23-00-42 RRN Project Details.png"
+									"src": "/I:/Model/model-1.png"
 								},
 								{
 									"key": "data",
@@ -199,12 +199,12 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/user/create-admin",
+							"raw": "http://localhost:5000/api/v1/user/create-admin",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -222,7 +222,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTg4ZWYyNC1jMTM1LTRjMTUtOTRmMC1mMWQxMWEyZWVjM2YiLCJyb2xlIjoiU1VQRVJfQURNSU4iLCJlbWFpbCI6InN1cGVyQGFkbWluLmNvbSIsImlhdCI6MTcxNDkzMDc1OSwiZXhwIjoxNzE3NTIyNzU5fQ.5qfCKTuogdIEV_F3INvpMvlq05FO9Yd8iBNzC7u5vdk",
+								"value": "{{superAdmin}}",
 								"type": "text"
 							}
 						],
@@ -232,11 +232,11 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/user/Downloads/IMG_20220503_102130_1.jpg"
+									"src": "/I:/Model/model-25.png"
 								},
 								{
 									"key": "data",
-									"value": "{\n    \"password\": \"123456\",\n    \"doctor\": {\n        \"email\": \"doctor34@gmail.com\",\n        \"name\": \"Dr. Banti\",\n        \"contactNumber\": \"+1234567890\",\n        \"address\": \"123 Medical Street, Cityville\",\n        \"registrationNumber\": \"12345\",\n        \"experience\": 5,\n        \"gender\": \"MALE\",\n        \"apointmentFee\": 100,\n        \"qualification\": \"MD, PhD\",\n        \"currentWorkingPlace\": \"City Hospital\",\n        \"designation\": \"Senior Consultant\"\n    }\n}\n",
+									"value": "{\n  \"password\": \"123456\",\n  \"doctor\": {\n    \"email\": \"doctor56@gmail.com\",\n    \"name\": \"Dr. John Doe\",\n    \"contactNumber\": \"+9876543210\",\n    \"city\": \"Dhaka\",\n    \"address\": \"456 Health Avenue, Metropolis\",\n    \"registrationNumber\": \"67890\",\n    \"experience\": 10,\n    \"gender\": \"FEMALE\",\n    \"apointmentFee\": 150,\n    \"qualification\": \"MBBS, FRCS\",\n    \"currentWorkingPlace\": \"Global Health Clinic\",\n    \"designation\": \"Chief Medical Officer\"\n  }\n}\n",
 									"type": "text"
 								}
 							]
@@ -275,22 +275,22 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/Naimur Reza/Desktop/1709896049064.jpg"
+									"src": "/I:/Model/model-6.png"
 								},
 								{
 									"key": "data",
-									"value": "{\n  \"password\": \"newpassword\",\n  \"patient\": {\n    \"name\": \"Hamid\",\n    \"email\": \"ham@example.com\",\n    \"contactNumber\": \"1234567890\",\n\"address\":\"Feni\"\n}\n}",
+									"value": "{\n  \"password\": \"newpassword\",\n  \"patient\": {\n    \"name\": \"John\",\n    \"email\": \"john@example.com\",\n    \"contactNumber\": \"1234567890\",\n\"address\":\"Feni\"\n}\n}",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/user/create-patient",
+							"raw": "http://localhost:5000/api/v1/user/create-patient",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -305,14 +305,20 @@
 					"name": "Get all users",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{superAdmin}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/user",
+							"raw": "http://localhost:5000/api/v1/user",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -324,9 +330,24 @@
 				},
 				{
 					"name": "Update status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": ""
+						}
 					},
 					"response": []
 				},
@@ -337,17 +358,17 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsb3VkQGFkbWluLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxMTk2NzE1MSwiZXhwIjoxNzEyMDUzNTUxfQ.inzQ15zHJG7dScdKF3Q2p20yNg-2qyoT20bX-TBMtS8",
+								"value": "{{superAdmin}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/user/me",
+							"raw": "http://localhost:5000/api/v1/user/me",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -365,7 +386,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsb3VkQGFkbWluLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTcxMjEzNzMyNSwiZXhwIjoxNzEyMzk2NTI1fQ.LhhJzMDrHYTuX7LG4c4fUpMou8mnfpVmIwYR3ikITFQ",
+								"value": "{{superAdmin}}",
 								"type": "text"
 							}
 						],
@@ -375,7 +396,7 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/Naimur Reza/Desktop/levi.jpg"
+									"src": "/I:/Model/model-2.png"
 								},
 								{
 									"key": "data",
@@ -385,12 +406,12 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/user/update-my-profile",
+							"raw": "http://localhost:5000/api/v1/user/update-my-profile",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -412,12 +433,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/admin?sortBy=name&sortOrder=asc&page=6&limit=2",
+							"raw": "http://localhost:5000/api/v1/admin?sortBy=name&sortOrder=asc&page=6&limit=2",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -461,12 +482,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/admin/2b3a5981-5fd9-4f86-954f-997f388c2848",
+							"raw": "http://localhost:5000/api/v1/admin/2b3a5981-5fd9-4f86-954f-997f388c2848",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -492,12 +513,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/admin/2b3a5981-5fd9-4f86-954f-997f388c2848",
+							"raw": "http://localhost:5000/api/v1/admin/2b3a5981-5fd9-4f86-954f-997f388c2848",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -514,12 +535,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/admin/573eadff-94a5-4649-b096-455217494eba",
+							"raw": "http://localhost:5000/api/v1/admin/573eadff-94a5-4649-b096-455217494eba",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -536,12 +557,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/admin/573eadff-94a5-4649-b096-455217494eba",
+							"raw": "http://localhost:5000/api/v1/admin/573eadff-94a5-4649-b096-455217494eba",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -569,7 +590,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:5000/api/v1/doctor?sortBy=name",
+							"raw": "http://localhost:5000/api/v1/doctor",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -583,7 +604,8 @@
 							"query": [
 								{
 									"key": "sortBy",
-									"value": "name"
+									"value": "name",
+									"disabled": true
 								},
 								{
 									"key": "sortOrder",
@@ -609,6 +631,11 @@
 									"key": "isDeleted",
 									"value": "",
 									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "Dhaka",
+									"disabled": true
 								}
 							]
 						}
@@ -627,12 +654,12 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/admin/2b3a5981-5fd9-4f86-954f-997f388c2848",
+							"raw": "http://localhost:5000/api/v1/admin/2b3a5981-5fd9-4f86-954f-997f388c2848",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -664,12 +691,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/doctor/46059fef-fbcf-4ff6-8e79-a2f29616b4c5",
+							"raw": "http://localhost:5000/api/v1/doctor/46059fef-fbcf-4ff6-8e79-a2f29616b4c5",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -692,12 +719,12 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/doctor/573eadff-94a5-4649-b096-455217494eba",
+							"raw": "http://localhost:5000/api/v1/doctor/573eadff-94a5-4649-b096-455217494eba",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -720,12 +747,12 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/doctor/573eadff-94a5-4649-b096-455217494eba",
+							"raw": "http://localhost:5000/api/v1/doctor/573eadff-94a5-4649-b096-455217494eba",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -753,12 +780,12 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/patient?sortBy=name",
+							"raw": "http://localhost:5000/api/v1/patient?sortBy=name",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -811,12 +838,12 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/patient/2b3a5981-5fd9-4f86-954f-997f388c2848",
+							"raw": "http://localhost:5000/api/v1/patient/2b3a5981-5fd9-4f86-954f-997f388c2848",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -848,12 +875,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/patient/fd2d62c6-1784-41c6-8b67-dc6179c777e3",
+							"raw": "http://localhost:5000/api/v1/patient/fd2d62c6-1784-41c6-8b67-dc6179c777e3",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -876,12 +903,12 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/patient/c886c56a-1242-491f-8825-4b2e98e1a78e",
+							"raw": "http://localhost:5000/api/v1/patient/c886c56a-1242-491f-8825-4b2e98e1a78e",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -904,12 +931,12 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/patient/573eadff-94a5-4649-b096-455217494eba",
+							"raw": "http://localhost:5000/api/v1/patient/573eadff-94a5-4649-b096-455217494eba",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -1039,12 +1066,12 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/specialties/id",
+							"raw": "http://localhost:5000/api/v1/specialties/id",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -1067,13 +1094,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{doctorToken}}",
+								"value": "{{superAdmin}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"startDate\": \"2024-04-18\",\r\n    \"endDate\": \"2024-04-24\",\r\n    \"startTime\": \"09:00\",\r\n    \"endTime\": \"17:00\"\r\n}",
+							"raw": "{\r\n    \"startDate\": \"2025-01-25\",\r\n    \"endDate\": \"2025-01-26\",\r\n    \"startTime\": \"09:00\",\r\n    \"endTime\": \"17:00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1081,12 +1108,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/schedule",
+							"raw": "http://localhost:5000/api/v1/schedule",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -1108,12 +1135,12 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/schedule?startDate=2024-06-27T03:30:00.000Z&endDate=2024-06-27T04:00:00.000Z",
+							"raw": "http://localhost:5000/api/v1/schedule?startDate=2024-06-27T03:30:00.000Z&endDate=2024-06-27T04:00:00.000Z",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -1155,13 +1182,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{doctorToken}}",
+								"value": "{{bantiDoctor}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"scheduleIds\": [\r\n        \"044dcab5-a8c6-4987-aa24-c60e91c2fde3\",\r\n        \"03c68a17-70dc-486a-887a-93176ccf6261\",\r\n        \"01a3717c-cc0f-4e72-ae57-6f6b68768d6a\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"scheduleIds\": [\r\n        \"29c92f14-ef05-489b-a01d-d9389e9dc700\",\r\n        \"2bbb026a-db09-4f0a-bb81-c21ce53b150c\",\r\n        \"3b2f4de1-3048-4ad4-a225-70163a8186ef\",\r\n        \"3c20ff63-b0ca-48f9-ad25-b85a2a0b8319\",\r\n        \"3c25e6b7-b87a-4647-ab42-7b356a9232c8\",\r\n        \"4b2a8ed5-f49a-4b33-a370-2c5277d1e27f\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1169,12 +1196,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/doctor-schedule",
+							"raw": "http://localhost:5000/api/v1/doctor-schedule",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -1196,12 +1223,12 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/schedule?startDate=2024-06-27T03:30:00.000Z&endDate=2024-06-27T04:00:00.000Z",
+							"raw": "http://localhost:5000/api/v1/schedule?startDate=2024-06-27T03:30:00.000Z&endDate=2024-06-27T04:00:00.000Z",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -1256,12 +1283,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/doctor-schedule/my-schedule?isBooked=false",
+							"raw": "http://localhost:5000/api/v1/doctor-schedule/my-schedule?isBooked=false",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -1287,14 +1314,29 @@
 					"name": "Book Appointment",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{johnPatient}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"doctorId\": \"aaac2247-10f6-4f3f-a6e4-271274814b96\",\r\n    \"scheduleId\": \"4b2a8ed5-f49a-4b33-a370-2c5277d1e27f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/appointment",
+							"raw": "http://localhost:5000/api/v1/appointment",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -1321,12 +1363,12 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/payments",
+							"raw": "http://localhost:5000/api/v1/payments",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -1344,6 +1386,212 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Notification",
+			"item": [
+				{
+					"name": "Get My Notifications",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{dhakaDoctorToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/notification/my-notifications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"notification",
+								"my-notifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Notification",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{dhakaDoctorToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/notification/my-notifications/52ee094d-90ba-4b32-9957-e50d8399141a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"notification",
+								"my-notifications",
+								"52ee094d-90ba-4b32-9957-e50d8399141a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Notification",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{hamPatient}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/notification/delete-notification/1e13f115-724a-4e1d-8a14-4e2260233004",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"notification",
+								"delete-notification",
+								"1e13f115-724a-4e1d-8a14-4e2260233004"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Toggle Read-Unread",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{dhakaDoctorToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/notification/toggle-read-unread/52ee094d-90ba-4b32-9957-e50d8399141a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"notification",
+								"toggle-read-unread",
+								"52ee094d-90ba-4b32-9957-e50d8399141a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Notification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{superAdmin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"This is test notification from SuperAdmin\",\r\n    \"content\": \"this is test notification content from SuperAdmin. Do you get it?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/notification/send-notification",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"notification",
+								"send-notification"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "superAdmin",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNzhhYjQ2OC01MTNlLTQ5MjUtYjgyYS05YWI3M2I4ZThlZmQiLCJyb2xlIjoiU1VQRVJfQURNSU4iLCJlbWFpbCI6InN1cGVyLmFkbWluQGFkbWluLmNvbSIsImlhdCI6MTczODA1OTUwOSwiZXhwIjoxNzQwNjUxNTA5fQ.BFDwhxlYLPNDdHOREmX-6y1ety5_SNao6EE97INAZ6g",
+			"type": "string"
+		},
+		{
+			"key": "dhakaDoctorToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZDc5ZTZiMy1kOTFjLTQ0NjktODM3My0xYjUzYTU2OTMxYjAiLCJyb2xlIjoiRE9DVE9SIiwiZW1haWwiOiJkb2N0b3I1NkBnbWFpbC5jb20iLCJpYXQiOjE3Mzc1MjEwNTEsImV4cCI6MTc0MDExMzA1MX0.zAqi5COe8c1mT3nQFcPB3DDBQy_gZfrFw0xvPF0G4vk",
+			"type": "string"
+		},
+		{
+			"key": "bantiDoctor",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzA4ODg0OS02N2YyLTQ5M2YtYjE0Zi1lYjlhMTUwNjQxNTEiLCJyb2xlIjoiRE9DVE9SIiwiZW1haWwiOiJkb2N0b3IzNEBnbWFpbC5jb20iLCJpYXQiOjE3MzgwNDY2NjYsImV4cCI6MTc0MDYzODY2Nn0._B-3spHBXuM8zhuwI1ZEQTFTZEMXctxroDXyprca2H8",
+			"type": "string"
+		},
+		{
+			"key": "hamPatient",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkODQwODVkOC1jN2Y0LTRlNWUtYTVkOC03YTg4MjViNjgzNDUiLCJyb2xlIjoiUEFUSUVOVCIsImVtYWlsIjoiaGFtQGV4YW1wbGUuY29tIiwiaWF0IjoxNzM3NTQzMjkzLCJleHAiOjE3NDAxMzUyOTN9.GrndRZfbvv5_EHhofZ_tBIqW4o6pOQBoZCvv7iiCsZk",
+			"type": "string"
+		},
+		{
+			"key": "johnPatient",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMzc4ZTFhOC0xZWVmLTQxMzUtODA3NS05ODZjNGFjNjllNjYiLCJyb2xlIjoiUEFUSUVOVCIsImVtYWlsIjoiam9obkBleGFtcGxlLmNvbSIsImlhdCI6MTczODA0NzIzNywiZXhwIjoxNzQwNjM5MjM3fQ.y7SYVdAJ1T50k4i9r5XU8crOBmbxpDKkGtbSjcINrzs",
+			"type": "string"
 		}
 	]
 }

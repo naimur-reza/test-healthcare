@@ -1,13 +1,17 @@
 import { z } from "zod";
 
-export const NotificationRecipientTypeSchema = z.enum(["DOCTOR", "PATIENT"]);
+export const NotificationRecipientTypeSchema = z.enum([
+  "SUPER_ADMIN",
+  "ADMIN",
+  "DOCTOR",
+  "PATIENT"
+]);
 
 export const NotificationValidationSchema = z.object({
-  id: z.string().uuid(),
-  title: z.string(),
-  content: z.string(),
-  recipientId: z.string(),
-  recipientType: NotificationRecipientTypeSchema,
-  isRead: z.boolean().default(false),
-  createdAt: z.date().default(() => new Date()),
+  body: z.object({
+    title: z.string(),
+    content: z.string(),
+    isRead: z.boolean().default(false),
+    createdAt: z.date().default(() => new Date()),
+  })
 });
