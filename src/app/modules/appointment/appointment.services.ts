@@ -140,6 +140,17 @@ const createAppointment = async (
       slug: patientNotificationSlug,
     };
 
+    const paymentSlugMetaData = `Payment Pending for Appointment with ${result.doctor.name}`;
+    const paymentNotificationSlug = slugGenerator(paymentSlugMetaData);
+
+    const patientPaymentNotification = {
+      title: 'Complete Your Payment',
+      content: `Your appointment with ${result.doctor.name} is reserved. Please complete the payment within 30 minutes to confirm your booking. Your appointment is scheduled on ${formattedStartDateTime} to ${formattedEndDateTime}. Failure to complete the payment will result in the cancellation of your appointment.`,
+      recipientId: patientUser.id,
+      recipientType: NotificationRecipientType.PATIENT,
+      slug: paymentNotificationSlug,
+    };
+
     // Create notification for doctor
     const doctorUser = await prisma.user.findFirst({
       where: {
@@ -161,12 +172,13 @@ const createAppointment = async (
     };
 
     await transactionClient.notification.createMany({
-      data: [patientNotification, doctorNotification],
+      data: [patientNotification, patientPaymentNotification, doctorNotification],
     });
 
     // Emit notifications via Socket.IO
     io.to(doctorUser.id).emit('newNotification', doctorNotification);
     io.to(patientUser.id).emit('newNotification', patientNotification);
+    io.to(patientUser.id).emit('newNotification', patientPaymentNotification);
 
     return result;
   });
