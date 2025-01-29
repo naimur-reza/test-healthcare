@@ -52,6 +52,9 @@ model Doctor {
   prescription        Prescription[]
   review              Review[]
 
+  departmentId String
+  department   Department @relation(fields: [departmentId], references: [id])
+
   @@map("doctors")
 }
 
@@ -257,7 +260,7 @@ model Review {
 }
 
 model Notification {
-  id            String   @id @default(uuid())
+  id            String                    @id @default(uuid())
   title         String
   content       String
   recipientId   String   // ID of the recipient (Doctor or Patient)
@@ -267,6 +270,17 @@ model Notification {
   slug          String?
 
   @@map("notifications")
+}
+
+model Department {
+  id             String   @id @default(uuid())
+  departmentName String
+  isDeleted      Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now())
+  doctors        Doctor[]
+
+  @@map("departments")
 }
 
 enum NotificationRecipientType {

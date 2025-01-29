@@ -1,0 +1,5 @@
+Tue Jan 28 2025 17:55:0 } [PH] error: 
+Invalid `prisma.appointment.findMany()` invocation:
+
+
+Database `healthcare` does not exist on the database server at `localhost:5432`.

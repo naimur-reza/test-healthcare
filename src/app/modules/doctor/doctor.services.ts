@@ -25,7 +25,10 @@ const getAllFromDB = async (
   options: IPaginationOptions,
 ): Promise<IGenericResponse<Doctor[]>> => {
   const { limit, page, skip } = paginationHelpers.calculatePagination(options);
-  const { searchTerm, specialties, city, ...filterData } = filters;
+  const { searchTerm, specialties, city, departmentName, ...filterData } =
+    filters;
+
+    console.log(departmentName);
 
   const andConditions: Prisma.DoctorWhereInput[] = [];
 
@@ -41,7 +44,6 @@ const getAllFromDB = async (
   }
 
   if (specialties && specialties.length > 0) {
-    // Corrected specialties condition
     andConditions.push({
       doctorSpecialties: {
         some: {
@@ -56,12 +58,22 @@ const getAllFromDB = async (
     });
   }
 
-  // filter doctor by city
   if (city) {
     andConditions.push({
       city: {
         equals: city,
         mode: 'insensitive',
+      },
+    });
+  }
+
+  if (departmentName) {
+    andConditions.push({
+      department: {
+        departmentName: {
+          contains: departmentName,
+          mode: 'insensitive', // Case-insensitive search
+        },
       },
     });
   }
@@ -99,6 +111,13 @@ const getAllFromDB = async (
       doctorSpecialties: {
         include: {
           specialties: true,
+        },
+      },
+      department: {
+        // Ensure you're including department details
+        select: {
+          id: true,
+          departmentName: true,
         },
       },
     },

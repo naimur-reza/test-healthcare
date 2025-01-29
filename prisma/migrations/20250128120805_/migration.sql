@@ -1,4 +1,7 @@
 -- CreateEnum
+CREATE TYPE "NotificationRecipientType" AS ENUM ('DOCTOR', 'PATIENT');
+
+-- CreateEnum
 CREATE TYPE "UserRole" AS ENUM ('ADMIN', 'DOCTOR', 'PATIENT', 'SUPER_ADMIN');
 
 -- CreateEnum
@@ -40,6 +43,7 @@ CREATE TABLE "doctors" (
     "name" TEXT NOT NULL,
     "profilePhoto" TEXT,
     "contactNumber" TEXT NOT NULL,
+    "city" TEXT NOT NULL,
     "address" TEXT,
     "registrationNumber" TEXT NOT NULL,
     "experience" INTEGER NOT NULL DEFAULT 0,
@@ -217,6 +221,19 @@ CREATE TABLE "reviews" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "reviews_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "notifications" (
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
+    "recipientId" TEXT NOT NULL,
+    "recipientType" "NotificationRecipientType" NOT NULL,
+    "isRead" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "notifications_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
