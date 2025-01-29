@@ -263,10 +263,11 @@ model Notification {
   id            String                    @id @default(uuid())
   title         String
   content       String
-  recipientId   String // ID of the recipient (Doctor or Patient)
-  recipientType NotificationRecipientType // Either "DOCTOR" or "PATIENT"
-  isRead        Boolean                   @default(false)
-  createdAt     DateTime                  @default(now())
+  recipientId   String   // ID of the recipient (Doctor or Patient)
+  recipientType NotificationRecipientType   // Either "DOCTOR" or "PATIENT"
+  isRead        Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  slug          String?
 
   @@map("notifications")
 }
@@ -285,6 +286,8 @@ model Department {
 enum NotificationRecipientType {
   DOCTOR
   PATIENT
+  ADMIN
+  SUPER_ADMIN
 }
 
 enum UserRole {
