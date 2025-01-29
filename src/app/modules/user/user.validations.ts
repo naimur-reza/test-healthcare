@@ -16,7 +16,8 @@ const createDoctor = z.object({
     qualification: z.string(),
     currentWorkingPlace: z.string(),
     designation: z.string(),
-  })
+    departmentId: z.string(),
+  }),
 });
 
 const createAdmin = z.object({

@@ -5,6 +5,7 @@ export type IDoctorFilterRequest = {
   contactNo?: string | undefined;
   gender?: string | undefined;
   specialties?: string | undefined;
+  departmentName?: string | undefined;
 };
 
 export type IDoctorUpdate = {

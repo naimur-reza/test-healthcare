@@ -20,7 +20,7 @@
     "seed": "ts-node-dev --respawn --transpile-only prisma/seed.ts"
   },
   "dependencies": {
-    "@prisma/client": "^5.7.1",
+    "@prisma/client": "5.7.1",
     "@types/node": "^20.10.4",
     "axios": "^1.6.5",
     "bcrypt": "^5.1.1",
