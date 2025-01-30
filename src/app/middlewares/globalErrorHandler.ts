@@ -19,6 +19,7 @@ const globalErrorHandler: ErrorRequestHandler = (
   res: Response,
   next: NextFunction
 ) => {
+  console.log('main error', error);
   config.env === 'development'
     ? console.log(`🐱‍🏍 globalErrorHandler ~~`, { error })
     : errorlogger.error(`🐱‍🏍 globalErrorHandler ~~`, error);
@@ -43,6 +44,7 @@ const globalErrorHandler: ErrorRequestHandler = (
     message = simplifiedError.message;
     errorMessages = simplifiedError.errorMessages;
   } else if (error instanceof ApiError) {
+    console.log('error apierror instance', error)
     statusCode = error?.statusCode;
     message = error.message;
     errorMessages = error?.message
@@ -54,6 +56,7 @@ const globalErrorHandler: ErrorRequestHandler = (
       ]
       : [];
   } else if (error instanceof Error) {
+    console.log('error of error instance', error)
     message = error?.message;
     errorMessages = error?.message
       ? [

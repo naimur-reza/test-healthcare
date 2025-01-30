@@ -1,1 +1,34 @@
-test
+///////////////////////////
+
+#
+# Fatal process out of memory: Zone
+#
+----- Native stack trace -----
+
+Thu Jan 30 2025 15:0:28 } [PH] info: Client disconnected: 8AtyQduRCjZyZ7KsAAWN
+Thu Jan 30 2025 15:0:28 } [PH] info: Client disconnected: HsMjgq7bz0BrQDkZAAWR
+Thu Jan 30 2025 15:0:28 } [PH] info: Client disconnected: dJBkH6uNnK2c0mwgAAWZ
+ 1: 00007FF632ADBD7B node::SetCppgcReference+16011
+ 2: 00007FF6329BFB6F node::TriggerNodeReport+75231
+ 3: 00007FF633B68A56 v8::base::FatalOOM+54
+ 4: 00007FF6335BF841 v8::Function::Experimental_IsNopFunction+2417
+ 5: 00007FF63308315E v8::SnapshotCreator::GetIsolate+53054
+ 6: 00007FF633CB1588 v8::internal::compiler::CompilationDependencies::TransitionDependencyOffTheRecord+109176  
+ 7: 00007FF633CC3ADD v8::internal::compiler::CompilationDependencies::TransitionDependencyOffTheRecord+184269  
+ 8: 00007FF633CBC9B9 v8::internal::compiler::CompilationDependencies::TransitionDependencyOffTheRecord+155305  
+ 9: 00007FF633CBAD85 v8::internal::compiler::CompilationDependencies::TransitionDependencyOffTheRecord+148085
+10: 00007FF633CBB06B v8::internal::compiler::CompilationDependencies::TransitionDependencyOffTheRecord+148827  
+11: 00007FF633F65D92 v8::internal::compiler::CompilationDependencies::TransitionDependencyOffTheRecord+2945666 
+12: 00007FF633C7FA92 v8::internal::compiler::CompilationDependencies::~CompilationDependencies+765490
+13: 00007FF633C79CD3 v8::internal::compiler::CompilationDependencies::~CompilationDependencies+741491
+14: 00007FF633C7369A v8::internal::compiler::CompilationDependencies::~CompilationDependencies+715322
+15: 00007FF633539734 v8::SharedValueConveyor::SharedValueConveyor+30356
+16: 00007FF6334F2CAF v8::StringObject::ValueOf+41359
+17: 00007FF6337C43C5 v8::PropertyDescriptor::writable+1997061
+18: 00007FF6329C2459 X509_STORE_get_cleanup+713
+19: 00007FF632B3D50E uv_poll_stop+254
+20: 00007FF63422E01E inflateValidate+164606
+21: 00007FFE5E2E7374 BaseThreadInitThunk+20
+22: 00007FFE5FF1CC91 RtlUserThreadStart+33
+
+///////////////////////////

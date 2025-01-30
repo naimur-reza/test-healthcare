@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "NotificationRecipientType" AS ENUM ('DOCTOR', 'PATIENT');
+CREATE TYPE "NotificationRecipientType" AS ENUM ('DOCTOR', 'PATIENT', 'ADMIN', 'SUPER_ADMIN');
 
 -- CreateEnum
 CREATE TYPE "UserRole" AS ENUM ('ADMIN', 'DOCTOR', 'PATIENT', 'SUPER_ADMIN');
@@ -56,6 +56,7 @@ CREATE TABLE "doctors" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "averageRating" DOUBLE PRECISION NOT NULL DEFAULT 0.0,
+    "departmentId" TEXT NOT NULL,
 
     CONSTRAINT "doctors_pkey" PRIMARY KEY ("id")
 );
@@ -232,8 +233,20 @@ CREATE TABLE "notifications" (
     "recipientType" "NotificationRecipientType" NOT NULL,
     "isRead" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "slug" TEXT,
 
     CONSTRAINT "notifications_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "departments" (
+    "id" TEXT NOT NULL,
+    "departmentName" TEXT NOT NULL,
+    "isDeleted" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "departments_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -274,6 +287,9 @@ CREATE UNIQUE INDEX "reviews_appointmentId_key" ON "reviews"("appointmentId");
 
 -- AddForeignKey
 ALTER TABLE "doctors" ADD CONSTRAINT "doctors_email_fkey" FOREIGN KEY ("email") REFERENCES "users"("email") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "doctors" ADD CONSTRAINT "doctors_departmentId_fkey" FOREIGN KEY ("departmentId") REFERENCES "departments"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "doctor_specialties" ADD CONSTRAINT "doctor_specialties_specialtiesId_fkey" FOREIGN KEY ("specialtiesId") REFERENCES "specialties"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
