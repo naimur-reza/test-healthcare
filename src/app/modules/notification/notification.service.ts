@@ -1,15 +1,15 @@
-import httpStatus from "http-status";
-import ApiError from "../../../errors/ApiError";
-import prisma from "../../../shared/prisma";
-import { NotificationRecipientType } from "./notification.interface";
-import { UserRole, UserStatus } from "@prisma/client";
-import { Server } from "socket.io";
-import { slugGenerator } from "../../../shared/utils";
+import httpStatus from 'http-status';
+import ApiError from '../../../errors/ApiError';
+import prisma from '../../../shared/prisma';
+import { NotificationRecipientType } from './notification.interface';
+import { UserRole, UserStatus } from '@prisma/client';
+import { Server } from 'socket.io';
+import { slugGenerator } from '../../../shared/utils';
 
 const sendNotificationToDB = async (
   userId: string,
   payload: Record<string, string>,
-  io: Server
+  io: Server,
 ) => {
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -33,7 +33,7 @@ const sendNotificationToDB = async (
     [UserRole.PATIENT]: NotificationRecipientType.PATIENT,
   };
 
-  const notificationPromises = allUsers.map(async (user) => {
+  const notificationPromises = allUsers.map(async user => {
     const recipientType = roleToRecipientType[user.role];
     if (!recipientType) return;
 
@@ -55,10 +55,9 @@ const sendNotificationToDB = async (
   console.log('Notifications sent successfully');
 };
 
-
 const getUsersNotificationFromDB = async (
   userId: string,
-  role: NotificationRecipientType
+  role: NotificationRecipientType,
 ) => {
   const user = await prisma.user.findUnique({
     where: {
@@ -96,12 +95,12 @@ const getUsersNotificationFromDB = async (
     notifications,
     unreadCount,
   };
-}
+};
 
 const getUsersNotificationByIdFromDB = async (
   userId: string,
   role: NotificationRecipientType,
-  notificationId: string
+  notificationId: string,
 ) => {
   const user = await prisma.user.findUnique({
     where: {
@@ -122,7 +121,7 @@ const getUsersNotificationByIdFromDB = async (
       id: notificationId,
       recipientId,
       recipientType: role,
-    }
+    },
   });
   if (!notification) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Notification not found');
@@ -141,12 +140,12 @@ const getUsersNotificationByIdFromDB = async (
   }
 
   return notification;
-}
+};
 
 const toggleMarkNotificationAsReadFromDB = async (
   userId: string,
   role: NotificationRecipientType,
-  notificationId: string
+  notificationId: string,
 ) => {
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -155,17 +154,16 @@ const toggleMarkNotificationAsReadFromDB = async (
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
   }
 
-  const recipientId = (user.role === 'DOCTOR' || user.role === 'PATIENT')
-    ? user.id
-    : undefined;
+  const recipientId =
+    user.role === 'DOCTOR' || user.role === 'PATIENT' ? user.id : undefined;
 
   const notification = await prisma.notification.findUnique({
     where: { id: notificationId },
   });
   if (
     !notification ||
-    notification.recipientId !== recipientId
-    || notification.recipientType !== role
+    notification.recipientId !== recipientId ||
+    notification.recipientType !== role
   ) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Notification not found');
   }
@@ -179,7 +177,7 @@ const toggleMarkNotificationAsReadFromDB = async (
 const deleteNotificationFromDB = async (
   userId: string,
   role: NotificationRecipientType,
-  notificationId: string
+  notificationId: string,
 ) => {
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -199,7 +197,8 @@ const deleteNotificationFromDB = async (
       const patient = await prisma.patient.findUnique({
         where: { email: user.email },
       });
-      if (!patient) throw new ApiError(httpStatus.NOT_FOUND, 'Patient not found');
+      if (!patient)
+        throw new ApiError(httpStatus.NOT_FOUND, 'Patient not found');
       return patient.id;
     }
   })();
@@ -209,8 +208,8 @@ const deleteNotificationFromDB = async (
   });
   if (
     !notification ||
-    notification.recipientId !== recipientId
-    || notification.recipientType !== role
+    notification.recipientId !== recipientId ||
+    notification.recipientType !== role
   ) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Notification not found');
   }
@@ -218,7 +217,7 @@ const deleteNotificationFromDB = async (
   return prisma.notification.delete({
     where: { id: notificationId },
   });
-}
+};
 
 export const NotificationService = {
   sendNotificationToDB,
@@ -226,4 +225,4 @@ export const NotificationService = {
   getUsersNotificationByIdFromDB,
   toggleMarkNotificationAsReadFromDB,
   deleteNotificationFromDB,
-}
+};

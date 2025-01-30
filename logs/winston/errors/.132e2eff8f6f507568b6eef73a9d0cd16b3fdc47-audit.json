@@ -1,25 +1,25 @@
 {
-    "keep": {
-        "days": true,
-        "amount": 14
+  "keep": {
+    "days": true,
+    "amount": 14
+  },
+  "auditLog": "E:\\Health Care\\ph-health-care-server\\logs\\winston\\errors\\.132e2eff8f6f507568b6eef73a9d0cd16b3fdc47-audit.json",
+  "files": [
+    {
+      "date": 1737361261670,
+      "name": "E:\\Health Care\\ph-health-care-server\\logs\\winston\\errors\\phu-2025-20-01-14-error.log",
+      "hash": "2b8272ecf4fc04fda07838e36f4ddbb9d2c24c92430141cff0174dbbe5829361"
     },
-    "auditLog": "E:\\Health Care\\ph-health-care-server\\logs\\winston\\errors\\.132e2eff8f6f507568b6eef73a9d0cd16b3fdc47-audit.json",
-    "files": [
-        {
-            "date": 1737361261670,
-            "name": "E:\\Health Care\\ph-health-care-server\\logs\\winston\\errors\\phu-2025-20-01-14-error.log",
-            "hash": "2b8272ecf4fc04fda07838e36f4ddbb9d2c24c92430141cff0174dbbe5829361"
-        },
-        {
-            "date": 1737435152030,
-            "name": "E:\\Health Care\\ph-health-care-server\\logs\\winston\\errors\\phu-2025-21-01-10-error.log",
-            "hash": "90db676d74e7aa114e9e00b2c04068de5f7b0fb7a73137b2082c15c281a37c1a"
-        },
-        {
-            "date": 1737437112310,
-            "name": "E:\\Health Care\\ph-health-care-server\\logs\\winston\\errors\\phu-2025-21-01-11-error.log",
-            "hash": "6f6afab060fd0c92ca9d9b1886b35e004e907ccb4dc464e76d55a01f1257c941"
-        }
-    ],
-    "hashType": "sha256"
+    {
+      "date": 1737435152030,
+      "name": "E:\\Health Care\\ph-health-care-server\\logs\\winston\\errors\\phu-2025-21-01-10-error.log",
+      "hash": "90db676d74e7aa114e9e00b2c04068de5f7b0fb7a73137b2082c15c281a37c1a"
+    },
+    {
+      "date": 1737437112310,
+      "name": "E:\\Health Care\\ph-health-care-server\\logs\\winston\\errors\\phu-2025-21-01-11-error.log",
+      "hash": "6f6afab060fd0c92ca9d9b1886b35e004e907ccb4dc464e76d55a01f1257c941"
+    }
+  ],
+  "hashType": "sha256"
 }

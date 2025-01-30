@@ -25,8 +25,8 @@ const createAdmin = z.object({
   admin: z.object({
     email: z.string().email(),
     name: z.string(),
-    contactNumber: z.string()
-  })
+    contactNumber: z.string(),
+  }),
 });
 
 const createPatient = z.object({
@@ -35,12 +35,12 @@ const createPatient = z.object({
     email: z.string().email(),
     name: z.string(),
     contactNumber: z.string({
-      required_error: "Contact number is required!"
+      required_error: 'Contact number is required!',
     }),
     address: z.string({
-      required_error: "Address is required"
-    })
-  })
+      required_error: 'Address is required',
+    }),
+  }),
 });
 
 const updateStatus = z.object({

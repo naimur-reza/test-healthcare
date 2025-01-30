@@ -6,17 +6,18 @@ import { UserServices } from './user.services';
 import { userFilterableFields } from './user.constant';
 import pick from '../../../shared/pick';
 
-const createDoctor = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-  //const { doctor, ...userData } = req.body;
-  const result = await UserServices.createDoctor(req);
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Doctor created successfully!',
-    data: result,
-  });
-});
-
+const createDoctor = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    //const { doctor, ...userData } = req.body;
+    const result = await UserServices.createDoctor(req);
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Doctor created successfully!',
+      data: result,
+    });
+  },
+);
 
 const createAdmin = catchAsync(async (req: Request, res: Response) => {
   //const { admin, ...userData } = req.body;
@@ -51,7 +52,6 @@ const changeProfileStatus = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-
 const getAllUser = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, userFilterableFields);
   const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
@@ -74,7 +74,7 @@ const getMyProfile = catchAsync(async (req: Request, res: Response) => {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Profile data fetched!',
-    data: result
+    data: result,
   });
 });
 
@@ -87,7 +87,7 @@ const updateMyProfile = catchAsync(async (req: Request, res: Response) => {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Profile data fetched!',
-    data: result
+    data: result,
   });
 });
 
@@ -98,5 +98,5 @@ export const UserController = {
   changeProfileStatus,
   getAllUser,
   getMyProfile,
-  updateMyProfile
+  updateMyProfile,
 };

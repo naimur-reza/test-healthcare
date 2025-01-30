@@ -10,7 +10,7 @@ const create = z.object({
     }),
     comment: z.string({
       required_error: 'Comment is required',
-    })
+    }),
   }),
 });
 
