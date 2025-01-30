@@ -1,55 +1,65 @@
 {
-    "keep": {
-        "days": true,
-        "amount": 14
+  "keep": {
+    "days": true,
+    "amount": 14
+  },
+  "auditLog": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\.2c62514fef973674f96864895987b092dec1c08c-audit.json",
+  "files": [
+    {
+      "date": 1738049099594,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-28-01-13-success.log",
+      "hash": "37f6f50ca38e2f54d3aee4c649c326f39925168b1af6208f57db14ee0782906d"
     },
-    "auditLog": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\.2c62514fef973674f96864895987b092dec1c08c-audit.json",
-    "files": [
-        {
-            "date": 1738049099594,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-28-01-13-success.log",
-            "hash": "37f6f50ca38e2f54d3aee4c649c326f39925168b1af6208f57db14ee0782906d"
-        },
-        {
-            "date": 1738065253627,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-28-01-17-success.log",
-            "hash": "50233878c7987d8ecda56dc7a8992a83668214e6497506744ed21012db0be44a"
-        },
-        {
-            "date": 1738066549522,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-28-01-18-success.log",
-            "hash": "0f58ab18bc21dab137cab484fd37ae5044fd45b12c605487c1783527c72dda8f"
-        },
-        {
-            "date": 1738074636927,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-28-01-20-success.log",
-            "hash": "7d66d2b4109cee6230e07108f5eb165a456ff47ae2cb8353008b506bfd3aaace"
-        },
-        {
-            "date": 1738131768439,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-29-01-12-success.log",
-            "hash": "747fae0832e724b23e95e66e33b8b0e8c6a32337e0d5273ca83dc33a9d7bdbb2"
-        },
-        {
-            "date": 1738150079981,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-29-01-17-success.log",
-            "hash": "97e8f064e5439874bb8738e3b1915ac1cefd8a96a82caf16ceb84e2c10a007c6"
-        },
-        {
-            "date": 1738152579779,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-29-01-18-success.log",
-            "hash": "6335e115b340d0b8a0b3c1e0bfa31515e1243861872a348068adad5eda704c48"
-        },
-        {
-            "date": 1738155620765,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-29-01-19-success.log",
-            "hash": "5f0a1b7a3029561355aef397f31cddfb2374e0faf2fdc52645655c1ea0e82de3"
-        },
-        {
-            "date": 1738159344497,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-29-01-20-success.log",
-            "hash": "fc66283221b369fcd10c742fa60ed31abe9cdf903fccea15eadf1c882f870017"
-        }
-    ],
-    "hashType": "sha256"
+    {
+      "date": 1738065253627,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-28-01-17-success.log",
+      "hash": "50233878c7987d8ecda56dc7a8992a83668214e6497506744ed21012db0be44a"
+    },
+    {
+      "date": 1738066549522,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-28-01-18-success.log",
+      "hash": "0f58ab18bc21dab137cab484fd37ae5044fd45b12c605487c1783527c72dda8f"
+    },
+    {
+      "date": 1738074636927,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-28-01-20-success.log",
+      "hash": "7d66d2b4109cee6230e07108f5eb165a456ff47ae2cb8353008b506bfd3aaace"
+    },
+    {
+      "date": 1738131768439,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-29-01-12-success.log",
+      "hash": "747fae0832e724b23e95e66e33b8b0e8c6a32337e0d5273ca83dc33a9d7bdbb2"
+    },
+    {
+      "date": 1738150079981,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-29-01-17-success.log",
+      "hash": "97e8f064e5439874bb8738e3b1915ac1cefd8a96a82caf16ceb84e2c10a007c6"
+    },
+    {
+      "date": 1738152579779,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-29-01-18-success.log",
+      "hash": "6335e115b340d0b8a0b3c1e0bfa31515e1243861872a348068adad5eda704c48"
+    },
+    {
+      "date": 1738155620765,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-29-01-19-success.log",
+      "hash": "5f0a1b7a3029561355aef397f31cddfb2374e0faf2fdc52645655c1ea0e82de3"
+    },
+    {
+      "date": 1738159344497,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-29-01-20-success.log",
+      "hash": "fc66283221b369fcd10c742fa60ed31abe9cdf903fccea15eadf1c882f870017"
+    },
+    {
+      "date": 1738227442869,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-30-01-14-success.log",
+      "hash": "f7c7e279a2efe53c8b840f114f53fc419cd91ce7de8275a6137b3a6739036717"
+    },
+    {
+      "date": 1738227606052,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\successes\\phu-2025-30-01-15-success.log",
+      "hash": "4094f90cfdac45170158a3dd470f0aa3368ffe53835923103aba3ed24dcb83f2"
+    }
+  ],
+  "hashType": "sha256"
 }

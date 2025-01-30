@@ -10,19 +10,22 @@ import {
   prescriptionRelationalFieldsMapper,
 } from './prescription.constants';
 
-const insertIntoDB = async (data: Partial<Prescription>, user: any): Promise<Prescription> => {
+const insertIntoDB = async (
+  data: Partial<Prescription>,
+  user: any,
+): Promise<Prescription> => {
   const isAppointmentExists = await prisma.appointment.findFirstOrThrow({
     where: {
       id: data.appointmentId,
-      paymentStatus: PaymentStatus.PAID
+      paymentStatus: PaymentStatus.PAID,
     },
     include: {
-      doctor: true
-    }
+      doctor: true,
+    },
   });
 
   if (!(user.email === isAppointmentExists.doctor.email)) {
-    throw new ApiError(httpStatus.BAD_REQUEST, "This is not your appointment!")
+    throw new ApiError(httpStatus.BAD_REQUEST, 'This is not your appointment!');
   }
 
   const result = await prisma.prescription.create({
@@ -31,8 +34,8 @@ const insertIntoDB = async (data: Partial<Prescription>, user: any): Promise<Pre
       doctorId: isAppointmentExists.doctorId,
       patientId: isAppointmentExists.patientId,
       followUpDate: data.followUpDate || null,
-      instructions: data.instructions as string
-    }
+      instructions: data.instructions as string,
+    },
   });
 
   return result;
@@ -84,8 +87,8 @@ const patientPrescriptions = async (
       options.sortBy && options.sortOrder
         ? { [options.sortBy]: options.sortOrder }
         : {
-          createdAt: 'desc',
-        },
+            createdAt: 'desc',
+          },
     include: {
       doctor: true,
       patient: true,
@@ -145,8 +148,8 @@ const getAllFromDB = async (
       options.sortBy && options.sortOrder
         ? { [options.sortBy]: options.sortOrder }
         : {
-          createdAt: 'desc',
-        },
+            createdAt: 'desc',
+          },
     include: {
       doctor: true,
       patient: true,

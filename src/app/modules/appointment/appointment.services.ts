@@ -19,7 +19,11 @@ import {
   appointmentSearchableFields,
 } from './appointment.constants';
 import { generateTransactionId } from '../payment/payment.utils';
-import { asyncForEach, formatDateTime, slugGenerator } from '../../../shared/utils';
+import {
+  asyncForEach,
+  formatDateTime,
+  slugGenerator,
+} from '../../../shared/utils';
 import { Server } from 'socket.io';
 
 const createAppointment = async (
@@ -104,8 +108,12 @@ const createAppointment = async (
     });
 
     // Format the start and end date/times
-    const formattedStartDateTime = formatDateTime(result.schedule.startDate.toString());
-    const formattedEndDateTime = formatDateTime(result.schedule.endDate.toString());
+    const formattedStartDateTime = formatDateTime(
+      result.schedule.startDate.toString(),
+    );
+    const formattedEndDateTime = formatDateTime(
+      result.schedule.endDate.toString(),
+    );
 
     // Create notification for patient
     const patientUser = await prisma.user.findFirst({
@@ -116,7 +124,7 @@ const createAppointment = async (
     if (!patientUser) {
       throw new ApiError(httpStatus.NOT_FOUND, 'Patient not found!');
     }
-    const patientSlugMetaData = `Appointment Confirmed with ${result.doctor.name}`
+    const patientSlugMetaData = `Appointment Confirmed with ${result.doctor.name}`;
     const patientNotificationSlug = slugGenerator(patientSlugMetaData);
     const patientNotification = {
       title: 'Appointment Confirmed',
@@ -141,13 +149,13 @@ const createAppointment = async (
     const doctorUser = await prisma.user.findFirst({
       where: {
         email: isDoctorExists.email,
-      }
-    })
+      },
+    });
     if (!doctorUser) {
       throw new ApiError(httpStatus.NOT_FOUND, 'Doctor not found!');
     }
 
-    const doctorSlugMetaData = `New appointment with ${isPatientExists.name}`
+    const doctorSlugMetaData = `New appointment with ${isPatientExists.name}`;
     const doctorNotificationSlug = slugGenerator(doctorSlugMetaData);
     const doctorNotification = {
       title: 'New Appointment',
@@ -158,7 +166,11 @@ const createAppointment = async (
     };
 
     await transactionClient.notification.createMany({
-      data: [patientPaymentNotification, patientNotification, doctorNotification],
+      data: [
+        patientPaymentNotification,
+        patientNotification,
+        doctorNotification,
+      ],
     });
 
     // Emit notifications via Socket.IO
@@ -213,15 +225,15 @@ const getMyAppointment = async (
       options.sortBy && options.sortOrder
         ? { [options.sortBy]: options.sortOrder }
         : {
-          createdAt: 'desc',
-        },
+            createdAt: 'desc',
+          },
     include:
       authUser?.role === UserRole.PATIENT
         ? { doctor: true, schedule: true }
         : {
-          patient: { include: { medicalReport: true, prescription: true } },
-          schedule: true,
-        },
+            patient: { include: { medicalReport: true, prescription: true } },
+            schedule: true,
+          },
   });
   const total = await prisma.appointment.count({
     where: whereConditions,
@@ -288,8 +300,8 @@ const getAllFromDB = async (
       options.sortBy && options.sortOrder
         ? { [options.sortBy]: options.sortOrder }
         : {
-          createdAt: 'desc',
-        },
+            createdAt: 'desc',
+          },
     include: {
       doctor: true,
       patient: true,
@@ -324,9 +336,8 @@ const cancelUnpaidAppointments = async (io: Server) => {
       },
       doctor: {
         include: { user: true },
-      }
+      },
     },
-
   });
 
   const appointmentIdsToCancel = unPaidAppointments.map(
@@ -395,8 +406,14 @@ const cancelUnpaidAppointments = async (io: Server) => {
         data: [patientNotification, doctorNotification],
       });
 
-      io.to(appointment.doctor.user.id).emit('newNotification', doctorNotification);
-      io.to(appointment.patient.user.id).emit('newNotification', patientNotification);
+      io.to(appointment.doctor.user.id).emit(
+        'newNotification',
+        doctorNotification,
+      );
+      io.to(appointment.patient.user.id).emit(
+        'newNotification',
+        patientNotification,
+      );
     });
   });
 };
@@ -447,7 +464,6 @@ export const AppointmentServices = {
   cancelUnpaidAppointments,
   changeAppointmentStatus,
 };
-
 
 /* 
 

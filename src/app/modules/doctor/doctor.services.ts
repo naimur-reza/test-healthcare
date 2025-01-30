@@ -28,7 +28,7 @@ const getAllFromDB = async (
   const { searchTerm, specialties, city, departmentName, ...filterData } =
     filters;
 
-    console.log(departmentName);
+  console.log(departmentName);
 
   const andConditions: Prisma.DoctorWhereInput[] = [];
 

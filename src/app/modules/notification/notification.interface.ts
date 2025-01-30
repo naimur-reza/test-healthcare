@@ -1,8 +1,8 @@
 export enum NotificationRecipientType {
-  SUPER_ADMIN = "SUPER_ADMIN",
-  ADMIN = "ADMIN",
-  DOCTOR = "DOCTOR",
-  PATIENT = "PATIENT",
+  SUPER_ADMIN = 'SUPER_ADMIN',
+  ADMIN = 'ADMIN',
+  DOCTOR = 'DOCTOR',
+  PATIENT = 'PATIENT',
 }
 
 export interface Notification {

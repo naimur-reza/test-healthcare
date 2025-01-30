@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
-import catchAsync from "../../../shared/catchAsync";
-import sendResponse from "../../../shared/sendResponse";
-import pick from "../../../shared/pick";
-import httpStatus from "http-status";
-import { DepartmentService } from "./department.service";
+import { Request, Response } from 'express';
+import catchAsync from '../../../shared/catchAsync';
+import sendResponse from '../../../shared/sendResponse';
+import pick from '../../../shared/pick';
+import httpStatus from 'http-status';
+import { DepartmentService } from './department.service';
 
 const createDepartment = catchAsync(async (req: Request, res: Response) => {
   const result = await DepartmentService.createDepartment(req.body);

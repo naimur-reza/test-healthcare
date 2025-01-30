@@ -157,8 +157,8 @@ const getAllUser = async (
       options.sortBy && options.sortOrder
         ? { [options.sortBy]: options.sortOrder }
         : {
-          createdAt: 'desc',
-        },
+            createdAt: 'desc',
+          },
     select: {
       id: true,
       email: true,
