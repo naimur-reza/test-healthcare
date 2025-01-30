@@ -14,6 +14,7 @@ import { ReviewRoutes } from '../modules/review/review.route';
 import { MetaRoutes } from '../modules/meta/meta.routes';
 import { NotificationRoutes } from '../modules/notification/notification.routes';
 import { DepartmentRoutes } from '../modules/department/department.route';
+import { ContactRoutes } from '../modules/contact/contact.route';
 
 const router = express.Router();
 
@@ -78,6 +79,10 @@ const moduleRoutes = [
   {
     path: '/department',
     route: DepartmentRoutes,
+  },
+  {
+    path: '/contact',
+    route: ContactRoutes,
   },
 ];
 

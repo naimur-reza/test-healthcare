@@ -6,9 +6,9 @@ import { ENUM_USER_ROLE } from '../../../enums/user';
 const router = express.Router();
 
 router.post(
-    '/init/:appointmentId',
-    auth(ENUM_USER_ROLE.PATIENT),
-    PaymentController.initPayment
+  '/init/:appointmentId',
+  auth(ENUM_USER_ROLE.PATIENT),
+  PaymentController.initPayment,
 );
 
 router.post(
@@ -17,6 +17,4 @@ router.post(
     PaymentController.paymentSuccess
 )
 
-
 export const paymentRoutes = router;
-

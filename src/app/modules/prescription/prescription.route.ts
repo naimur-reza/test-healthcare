@@ -9,21 +9,21 @@ const router = express.Router();
 router.get(
   '/',
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
-  PrescriptionController.getAllFromDB
+  PrescriptionController.getAllFromDB,
 );
 
 //router.get('/:id', PrescriptionController.getByIdFromDB);
 router.get(
   '/my-prescriptions',
   auth(ENUM_USER_ROLE.PATIENT),
-  PrescriptionController.patientPrescriptions
+  PrescriptionController.patientPrescriptions,
 );
 
 router.post(
   '/',
   auth(ENUM_USER_ROLE.DOCTOR),
   validateRequest(PrescriptionValidation.create),
-  PrescriptionController.insertIntoDB
+  PrescriptionController.insertIntoDB,
 );
 
 export const PrescriptionsRoutes = router;

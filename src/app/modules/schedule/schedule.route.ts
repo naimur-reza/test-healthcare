@@ -9,13 +9,13 @@ const router = express.Router();
 router.get(
   '/',
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.DOCTOR),
-  ScheduleController.getAllFromDB
+  ScheduleController.getAllFromDB,
 );
 
 router.get(
   '/:id',
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.DOCTOR),
-  ScheduleController.getByIdFromDB
+  ScheduleController.getByIdFromDB,
 );
 
 // router.patch('/:id', PatientController.updateIntoDB);
@@ -29,7 +29,7 @@ router.post(
 router.delete(
   '/:id',
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
-  ScheduleController.deleteFromDB
+  ScheduleController.deleteFromDB,
 );
 
 export const ScheduleRoutes = router;

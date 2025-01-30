@@ -1,10 +1,10 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const NotificationRecipientTypeSchema = z.enum([
-  "SUPER_ADMIN",
-  "ADMIN",
-  "DOCTOR",
-  "PATIENT"
+  'SUPER_ADMIN',
+  'ADMIN',
+  'DOCTOR',
+  'PATIENT',
 ]);
 
 export const NotificationValidationSchema = z.object({
@@ -13,5 +13,5 @@ export const NotificationValidationSchema = z.object({
     content: z.string(),
     isRead: z.boolean().default(false),
     createdAt: z.date().default(() => new Date()),
-  })
+  }),
 });

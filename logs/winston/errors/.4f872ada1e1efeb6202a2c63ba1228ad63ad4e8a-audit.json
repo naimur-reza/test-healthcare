@@ -1,65 +1,75 @@
 {
-    "keep": {
-        "days": true,
-        "amount": 14
+  "keep": {
+    "days": true,
+    "amount": 14
+  },
+  "auditLog": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\.4f872ada1e1efeb6202a2c63ba1228ad63ad4e8a-audit.json",
+  "files": [
+    {
+      "date": 1738049099599,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-28-01-13-error.log",
+      "hash": "e3c23d48c55baec0200eb7683e81e0bd73474590a98a2ebc599c17ba86afaec2"
     },
-    "auditLog": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\.4f872ada1e1efeb6202a2c63ba1228ad63ad4e8a-audit.json",
-    "files": [
-        {
-            "date": 1738049099599,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-28-01-13-error.log",
-            "hash": "e3c23d48c55baec0200eb7683e81e0bd73474590a98a2ebc599c17ba86afaec2"
-        },
-        {
-            "date": 1738051200379,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-28-01-14-error.log",
-            "hash": "4822cdf4488c08b0bb88e2cd4bc37df303fcea59e1e207c43ae55f7e3ae38b87"
-        },
-        {
-            "date": 1738055340200,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-28-01-15-error.log",
-            "hash": "6a3ce42bbeee00b4df6328c15660f5cf1eb3071706a54ff6a13b07387c9ca68b"
-        },
-        {
-            "date": 1738065253636,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-28-01-17-error.log",
-            "hash": "c459299c1d0a42ff29dc98ddb2dcc2aef7bbd7969fc2ad716c7258507b931562"
-        },
-        {
-            "date": 1738066549548,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-28-01-18-error.log",
-            "hash": "208687ad6b69331df2a5c9fe1664b8f21f02dc046bb3f8427b67a4b31eddfc8f"
-        },
-        {
-            "date": 1738074636938,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-28-01-20-error.log",
-            "hash": "f8e17a0a3032837bcf9ecad83a5c73d522fb185f9cb62fcf1c56cda4bf46b968"
-        },
-        {
-            "date": 1738131768453,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-29-01-12-error.log",
-            "hash": "d144dbedef4ba40200d05a8028b6785375ea658b4aeeb82c4a656e0a45339714"
-        },
-        {
-            "date": 1738150079995,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-29-01-17-error.log",
-            "hash": "5becec14d0771006a825f889708ea01063765f132e2c7b2f005d80d55dd7f7d8"
-        },
-        {
-            "date": 1738152579784,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-29-01-18-error.log",
-            "hash": "d2efd491b9d79e90ca6758433a448fe3e3ffc72e976754b856d3d9ce0e659b24"
-        },
-        {
-            "date": 1738155620769,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-29-01-19-error.log",
-            "hash": "8cfb9dd11c2a6021af7e2e27e361e31ae96862863f2bc5145565dc06de60d1ac"
-        },
-        {
-            "date": 1738159344502,
-            "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-29-01-20-error.log",
-            "hash": "66dbc4a180a34910f7a74e240a83adc06c9daa1a9c2f109d63c4c4f43933a82c"
-        }
-    ],
-    "hashType": "sha256"
+    {
+      "date": 1738051200379,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-28-01-14-error.log",
+      "hash": "4822cdf4488c08b0bb88e2cd4bc37df303fcea59e1e207c43ae55f7e3ae38b87"
+    },
+    {
+      "date": 1738055340200,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-28-01-15-error.log",
+      "hash": "6a3ce42bbeee00b4df6328c15660f5cf1eb3071706a54ff6a13b07387c9ca68b"
+    },
+    {
+      "date": 1738065253636,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-28-01-17-error.log",
+      "hash": "c459299c1d0a42ff29dc98ddb2dcc2aef7bbd7969fc2ad716c7258507b931562"
+    },
+    {
+      "date": 1738066549548,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-28-01-18-error.log",
+      "hash": "208687ad6b69331df2a5c9fe1664b8f21f02dc046bb3f8427b67a4b31eddfc8f"
+    },
+    {
+      "date": 1738074636938,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-28-01-20-error.log",
+      "hash": "f8e17a0a3032837bcf9ecad83a5c73d522fb185f9cb62fcf1c56cda4bf46b968"
+    },
+    {
+      "date": 1738131768453,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-29-01-12-error.log",
+      "hash": "d144dbedef4ba40200d05a8028b6785375ea658b4aeeb82c4a656e0a45339714"
+    },
+    {
+      "date": 1738150079995,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-29-01-17-error.log",
+      "hash": "5becec14d0771006a825f889708ea01063765f132e2c7b2f005d80d55dd7f7d8"
+    },
+    {
+      "date": 1738152579784,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-29-01-18-error.log",
+      "hash": "d2efd491b9d79e90ca6758433a448fe3e3ffc72e976754b856d3d9ce0e659b24"
+    },
+    {
+      "date": 1738155620769,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-29-01-19-error.log",
+      "hash": "8cfb9dd11c2a6021af7e2e27e361e31ae96862863f2bc5145565dc06de60d1ac"
+    },
+    {
+      "date": 1738159344502,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-29-01-20-error.log",
+      "hash": "66dbc4a180a34910f7a74e240a83adc06c9daa1a9c2f109d63c4c4f43933a82c"
+    },
+    {
+      "date": 1738227442883,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-30-01-14-error.log",
+      "hash": "5bf02ba563877a297ecec3aa19aa1f88ddc3f66f116ac3c901e52f72c824f652"
+    },
+    {
+      "date": 1738227606056,
+      "name": "C:\\Projects\\healthCareServer\\logs\\winston\\errors\\phu-2025-30-01-15-error.log",
+      "hash": "f2dbec737ab6325a6cac385872b1971a0ff2b51545b5950270fffa533fbf1edd"
+    }
+  ],
+  "hashType": "sha256"
 }

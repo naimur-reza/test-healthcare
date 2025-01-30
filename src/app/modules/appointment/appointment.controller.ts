@@ -8,62 +8,72 @@ import pick from '../../../shared/pick';
 import { appointmentFilterableFields } from './appointment.constants';
 
 const createAppointment = catchAsync(async (req: Request, res: Response) => {
-    const user = req.user;
-    const result = await AppointmentServices.createAppointment(
-        req.body,
-        user as IAuthUser,
-        req.io
-    );
-    sendResponse(res, {
-        statusCode: httpStatus.OK,
-        success: true,
-        message: 'Appointment booked successfully!',
-        data: result,
-    });
+  const user = req.user;
+  const result = await AppointmentServices.createAppointment(
+    req.body,
+    user as IAuthUser,
+    req.io,
+  );
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Appointment booked successfully!',
+    data: result,
+  });
 });
 
 const getMyAppointment = catchAsync(async (req: Request, res: Response) => {
-    const filters = pick(req.query, appointmentFilterableFields);
-    const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
-    const user = req.user;
-    const result = await AppointmentServices.getMyAppointment(filters, options, user as IAuthUser);
-    sendResponse(res, {
-        statusCode: httpStatus.OK,
-        success: true,
-        message: 'Appointment retrieval successfully',
-        meta: result.meta,
-        data: result.data,
-    });
+  const filters = pick(req.query, appointmentFilterableFields);
+  const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
+  const user = req.user;
+  const result = await AppointmentServices.getMyAppointment(
+    filters,
+    options,
+    user as IAuthUser,
+  );
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Appointment retrieval successfully',
+    meta: result.meta,
+    data: result.data,
+  });
 });
 
 const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
-    const filters = pick(req.query, appointmentFilterableFields)
-    const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
-    const result = await AppointmentServices.getAllFromDB(filters, options);
-    sendResponse(res, {
-        statusCode: httpStatus.OK,
-        success: true,
-        message: 'Appointment retrieval successfully',
-        meta: result.meta,
-        data: result.data,
-    });
+  const filters = pick(req.query, appointmentFilterableFields);
+  const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
+  const result = await AppointmentServices.getAllFromDB(filters, options);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Appointment retrieval successfully',
+    meta: result.meta,
+    data: result.data,
+  });
 });
 
-const changeAppointmentStatus = catchAsync(async (req: Request, res: Response) => {
+const changeAppointmentStatus = catchAsync(
+  async (req: Request, res: Response) => {
     const { id } = req.params;
     const user = req.user;
-    const result = await AppointmentServices.changeAppointmentStatus(id, req.body.status, user);
+    const result = await AppointmentServices.changeAppointmentStatus(
+      id,
+      req.body.status,
+      user,
+    );
     sendResponse(res, {
-        statusCode: httpStatus.OK,
-        success: true,
-        message: 'Appointment status changed successfully',
-        data: result
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Appointment status changed successfully',
+      data: result,
     });
-});
+  },
+);
 
 export const AppointmentController = {
-    createAppointment,
-    getMyAppointment,
-    getAllFromDB,
-    changeAppointmentStatus
+  createAppointment,
+  getMyAppointment,
+  getAllFromDB,
+  changeAppointmentStatus,
 };

@@ -69,7 +69,11 @@ const getMySchedules = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, scheduleFilterableFields);
   const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
   const user = req.user;
-  const result = await DoctorScheduleService.getMySchedules(filters, options, user);
+  const result = await DoctorScheduleService.getMySchedules(
+    filters,
+    options,
+    user,
+  );
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -85,5 +89,5 @@ export const ScheduleController = {
   // getByIdFromDB,
   // updateIntoDB,
   deleteFromDB,
-  getMySchedules
+  getMySchedules,
 };

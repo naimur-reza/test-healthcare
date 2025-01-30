@@ -75,7 +75,6 @@ const getAllDepartments = async (
   };
 };
 
-
 const getDepartmentById = async (id: string): Promise<Department | null> => {
   const result = await prisma.department.findUnique({
     where: {

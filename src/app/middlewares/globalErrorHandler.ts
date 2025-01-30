@@ -17,7 +17,7 @@ const globalErrorHandler: ErrorRequestHandler = (
   error,
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   console.log('main error', error);
   config.env === 'development'
@@ -49,22 +49,22 @@ const globalErrorHandler: ErrorRequestHandler = (
     message = error.message;
     errorMessages = error?.message
       ? [
-        {
-          path: '',
-          message: error?.message,
-        },
-      ]
+          {
+            path: '',
+            message: error?.message,
+          },
+        ]
       : [];
   } else if (error instanceof Error) {
     console.log('error of error instance', error)
     message = error?.message;
     errorMessages = error?.message
       ? [
-        {
-          path: '',
-          message: error?.message,
-        },
-      ]
+          {
+            path: '',
+            message: error?.message,
+          },
+        ]
       : [];
   }
 
