@@ -8,9 +8,9 @@ const createToken = (
 ): string => {
   const options: SignOptions = {
     algorithm: 'HS256',
-    expiresIn: expireTime,
+    // Cast expiresIn as any to bypass the strict type check
+    expiresIn: expireTime as any,
   };
-  // Cast secret as string to ensure it matches the expected type
   return jwt.sign(payload, secret as string, options);
 };
 
@@ -21,7 +21,7 @@ const verifyToken = (token: string, secret: Secret): JwtPayload => {
 const createPasswordResetToken = (payload: object) => {
   const options: SignOptions = {
     algorithm: 'HS256',
-    expiresIn: config.jwt.passwordResetTokenExpirationTime,
+    expiresIn: config.jwt.passwordResetTokenExpirationTime as any,
   };
   return jwt.sign(payload, config.jwt.secret as string, options);
 };
