@@ -6,3 +6,8 @@ node_modules
 dist
 dump
 
+
+yarn.lock
+bun.lockb
+package-lock.json
+.vercel
