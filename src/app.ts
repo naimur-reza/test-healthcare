@@ -1,14 +1,13 @@
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
-import globalErrorHandler from './app/middlewares/globalErrorHandler';
-import routes from './app/routes';
-import cookieParser from 'cookie-parser';
 import cron from 'node-cron';
+import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import { AppointmentServices } from './app/modules/appointment/appointment.services';
-import { errorlogger } from './shared/logger';
-import config from './config';
+import routes from './app/routes';
 import { io } from './server';
+import { errorlogger } from './shared/logger';
 
 const app: Application = express();
 
